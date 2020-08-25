@@ -46,7 +46,7 @@ void ssort(int * arr, int size)
     }
     
     temp = arr[placeIndex];
-    arr[placeIndex] = temp;
+    arr[placeIndex] = smallest;
     arr[smallestIndex] = temp;
   }
 
