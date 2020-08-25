@@ -27,26 +27,25 @@ bool checkOrder(int * arr, int size)
 #ifdef TEST_SORT
 void ssort(int * arr, int size)
 {
-  int smallest; //smallest value in array
   int temp; //temp variable for swaping values
   int smallestIndex; //index of smallest value in array
   int findIndex; //index to search across array
   int placeIndex; //index to place the smallest value
 
-  for (placeIndex = 0; placeIndex < size - 1; placeIndex++)
+  for (placeIndex = 0; placeIndex < size; placeIndex++)
   {
-    smallest = 1;
-    for (findIndex = 0; findIndex < size; findIndex++)
+    smallestIndex = placeIndex;
+    
+    for (findIndex = placeIndex; findIndex < size; findIndex++)
     {
-      if (arr[findIndex] < smallest)
+      if (arr[findIndex] < arr[smallestIndex])
       {
-        smallest = arr[findIndex];
         smallestIndex = findIndex;
       }
     }
-    
+
     temp = arr[placeIndex];
-    arr[placeIndex] = smallest;
+    arr[placeIndex] = arr[smallestIndex];
     arr[smallestIndex] = temp;
   }
 
