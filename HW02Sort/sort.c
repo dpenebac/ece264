@@ -32,21 +32,21 @@ void ssort(int * arr, int size)
   int findIndex; //index to search across array
   int placeIndex; //index to place the smallest value
 
-  for (placeIndex = 0; placeIndex < size; placeIndex++)
+  for (placeIndex = 0; placeIndex < size; placeIndex++) //for loop to place smallest indexes
   {
-    smallestIndex = placeIndex;
-    
-    for (findIndex = placeIndex; findIndex < size; findIndex++)
+    smallestIndex = placeIndex; //set the smallest to be the first value in the "unsorted array"
+
+    for (findIndex = placeIndex; findIndex < size; findIndex++) //search accross the unsorted array
     {
-      if (arr[findIndex] < arr[smallestIndex])
+      if (arr[findIndex] < arr[smallestIndex]) //if the value at findIndex is smaller than the value at smallestIndex
       {
-        smallestIndex = findIndex;
+        smallestIndex = findIndex; //change smallestIndex to be the findIndex
       }
     }
 
-    temp = arr[placeIndex];
-    arr[placeIndex] = arr[smallestIndex];
-    arr[smallestIndex] = temp;
+    temp = arr[placeIndex]; //set temp variable to be the value at which we are placing the smallest variable
+    arr[placeIndex] = arr[smallestIndex]; //set the smallest variable at the current place index
+    arr[smallestIndex] = temp; //set teh original location of the smallest variable to the temp variable
   }
 
   // This function has two levels of for
