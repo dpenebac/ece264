@@ -16,13 +16,45 @@ void eliminate(int n, int k)
   // check whether memory allocation succeeds.
   // if allocation fails, stop
   if (arr == NULL)
-    {
-      fprintf(stderr, "malloc fail\n");
-      return;
-    }
+  {
+    fprintf(stderr, "malloc fail\n");
+    return;
+  }
   // initialize all elements
 
+  int i; //loop variable
+  int c; //loop variable
+  int currIndex = n - 1; //current index that is being selected
+  int marked = n + 1; //variable to show that the index has been selected previously
+                                                                                                                                                                                                
+  for (i = 0; i < n; i++) //loop from 0 to n
+  {
+     arr[i] = i + 1; //set each value in the array to be the current index + 1
+  }
 
+  for (i = 0; i < n; i++) //loop from 0 to n
+  {
+    
+    for (c = 0; c < k; c++) //loop from 0 to k
+    {
+      if (currIndex == n - 1) //if the current Index is n-1 (end of array)
+      {
+        currIndex = 0; //send current index back to beginning
+      }
+      else //if not at end of array
+      {
+        currIndex += 1; //increment current index by 1
+      }
+       
+      if (arr[currIndex] == marked) //if the current index is marked
+      {
+        c--; //reduce c by 1 effectivily skipping this loop
+      }
+    }
+        
+    printf("%d\n",currIndex); //output the current index
+    arr[currIndex] = marked; //mark the arr where the current index is
+  }
   
   // counting to k,
   // mark the eliminated element
@@ -41,58 +73,3 @@ void eliminate(int n, int k)
   free (arr);
 }
 #endif
-
-/*
-#include <stdio.h>
-
-int main()
-{
-    int n = 6;
-    int k = 3;
-    int temp = k;
-    int i = 0;
-    int c;
-    int currIndex = 0;
-    
-    int arr[n];
-    
-    for (i = 0; i < n; i++)
-    {
-        arr[i] = i + 1;
-    }
-    
-    for (i = 0; i < n - 1; i++)
-    {
-        k = temp;
-        
-        while (k > 0)
-        {
-            if (currIndex == n - 1)
-            {
-                currIndex = 0;
-            }
-            else
-            {
-                currIndex += 1;
-            }
-            
-            if (arr[currIndex] != n)
-            {
-                k -= 1;
-            }
-        }
-        
-        printf("%d\n",arr[currIndex]);
-        arr[currIndex] = n;
-        
-        for (c = 0; c < n; c++)
-        {
-            printf("%d ", arr[c]);
-        }
-        printf("\n");
-    } 
-    
-    return (0);
-}
-
-*/
