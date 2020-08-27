@@ -41,3 +41,58 @@ void eliminate(int n, int k)
   free (arr);
 }
 #endif
+
+/*
+#include <stdio.h>
+
+int main()
+{
+    int n = 6;
+    int k = 3;
+    int temp = k;
+    int i = 0;
+    int c;
+    int currIndex = 0;
+    
+    int arr[n];
+    
+    for (i = 0; i < n; i++)
+    {
+        arr[i] = i + 1;
+    }
+    
+    for (i = 0; i < n - 1; i++)
+    {
+        k = temp;
+        
+        while (k > 0)
+        {
+            if (currIndex == n - 1)
+            {
+                currIndex = 0;
+            }
+            else
+            {
+                currIndex += 1;
+            }
+            
+            if (arr[currIndex] != n)
+            {
+                k -= 1;
+            }
+        }
+        
+        printf("%d\n",arr[currIndex]);
+        arr[currIndex] = n;
+        
+        for (c = 0; c < n; c++)
+        {
+            printf("%d ", arr[c]);
+        }
+        printf("\n");
+    } 
+    
+    return (0);
+}
+
+*/
