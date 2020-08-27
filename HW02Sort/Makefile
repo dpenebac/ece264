@@ -1,7 +1,7 @@
 # ***
 # *** You can modify this file. You do not (should not) submit this file
 # ***
-
+#Hi
 WARNING = -Wall -Wshadow --pedantic
 ERROR = -Wvla -Werror
 GCC = gcc -std=c99 -g $(WARNING) $(ERROR) 
