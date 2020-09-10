@@ -8,10 +8,31 @@
 #ifdef TEST_COUNTCHAR
 bool countChar(char * filename, int * counts, int size)
 {
+  FILE *file;
+  int endOfFile;
+  int nextChar;
+
+  file = fopen(filename, "r");
+  if (file == NULL)
+  {
+    printf("Error when opening file");
+    return(false);
+  }
+  endOfFile = feof(file);
+  while(true)
+  {
+    if(endOfFile)
+    {
+      break;
+    }
+    
+    nextChar = fgetc(file);
+  }
   // open a file whose name is filename for reading
   // if fopen fails, return false. Do NOT fclose
   // if fopen succeeds, read every character from the file
   //
+
   // if a character (call it onechar) is between
   // 0 and size - 1 (inclusive), increase
   // counts[onechar] by one
@@ -21,6 +42,7 @@ bool countChar(char * filename, int * counts, int size)
   // size is the size of counts
   // you may assume that counts has enough memory space
   //
+
   // hint: use fgetc
   // Please read the document of fgetc carefully, in particular
   // when reaching the end of the file
