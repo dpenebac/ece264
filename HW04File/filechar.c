@@ -8,9 +8,14 @@
 #ifdef TEST_COUNTCHAR
 bool countChar(char * filename, int * counts, int size)
 {
+
+  // open a file whose name is filename for reading
+  // if fopen fails, return false. Do NOT fclose
+  // if fopen succeeds, read every character from the file
+  //
+
   FILE *file;
-  int endOfFile;
-  int nextChar;
+  unsigned char oneChar;
 
   file = fopen(filename, "r");
   if (file == NULL)
@@ -18,20 +23,22 @@ bool countChar(char * filename, int * counts, int size)
     printf("Error when opening file");
     return(false);
   }
-  endOfFile = feof(file);
-  while(true)
-  {
-    if(endOfFile)
-    {
-      break;
-    }
+
+  do 
+	{
+		oneChar = fgetc(file);
     
-    nextChar = fgetc(file);
-  }
-  // open a file whose name is filename for reading
-  // if fopen fails, return false. Do NOT fclose
-  // if fopen succeeds, read every character from the file
-  //
+		if (feof(file) == 1)
+		{
+			break;
+		}
+		
+		if (oneChar > 0 && oneChar < size - 1)
+		{
+      counts[oneChar] += 1;
+		}	  
+
+	} while(1);
 
   // if a character (call it onechar) is between
   // 0 and size - 1 (inclusive), increase
@@ -43,11 +50,14 @@ bool countChar(char * filename, int * counts, int size)
   // you may assume that counts has enough memory space
   //
 
+  
+
   // hint: use fgetc
   // Please read the document of fgetc carefully, in particular
   // when reaching the end of the file
   //
-  return true;
+  fclose(file);
+  return(true);
 }
 #endif
 
@@ -61,5 +71,23 @@ void printCounts(int * counts, int size)
   // onechar is printed if ind is between 'a' and 'z' or
   // 'A' and 'Z'. Otherwise, print space
   // if counts[ind] is zero, do not print
+  int ind;
+  char oneChar;
+  for (ind = 0; ind < size - 1; ind++)
+  {
+    if ((ind <= 'z' && ind >= 'a') || (ind >= 'A' && ind <= 'Z'))
+    {
+      oneChar = ind;
+    }
+    else
+    {
+      oneChar = ' ';
+    }
+    
+    if (counts[ind] != 0)
+    {
+      printf("%d, %c, %d\n",ind,oneChar,counts[ind]);
+    }  
+  }
 }
 #endif
