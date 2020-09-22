@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 
 #ifdef TEST_COUNTWORD
 int countWord(char * filename, char word[], char * line, int size)
@@ -22,8 +23,10 @@ int countWord(char * filename, char word[], char * line, int size)
   
   FILE *file;
   file = fopen(filename,"r");
-  int sum = 0;
-  //int *wordLocation;
+  int wordCount = 0;
+  int i = 0;
+  int c = 0;
+  char space = ' ';
 
   if (file == NULL)
   {
@@ -33,13 +36,28 @@ int countWord(char * filename, char word[], char * line, int size)
 
   while (fgets(line,size,file) != NULL)
   {
-    if (strstr(line,word) != NULL)
+//printf("%s\n",line);
+    for (i = 0; i < size - 1; i++)
     {
-      sum += 1;
+      c = 0;
+      while(true)
+      {
+        if (line[i + c] != word[c] || line[i] == space)
+        {
+          break;
+        }
+        else if (c == strlen(word) - 1)
+        {
+          wordCount++;
+          i = i + c;
+          line[i] = word[c] + 1;
+        }
+        c++;
+      }
     }
   }
 
-  return(sum);
+  return(wordCount);
 
   // It is possible that the same word appears multiple times in a line
   // If this word is split in two or more lines, do not count the word.
