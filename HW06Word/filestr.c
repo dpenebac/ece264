@@ -36,7 +36,6 @@ int countWord(char * filename, char word[], char * line, int size)
 
   while (fgets(line,size,file) != NULL)
   {
-//printf("%s\n",line);
     for (i = 0; i < size - 1; i++)
     {
       c = 0;
@@ -56,6 +55,8 @@ int countWord(char * filename, char word[], char * line, int size)
       }
     }
   }
+  
+  fclose(file);
 
   return(wordCount);
 

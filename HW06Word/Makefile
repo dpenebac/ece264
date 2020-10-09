@@ -4,7 +4,8 @@
 
 WARNING = -Wall -Wshadow --pedantic
 ERROR = -Wvla -Werror
-GCC = gcc -std=c99 -g $(WARNING) $(ERROR) 
+GCC = gcc -std=c99 -g $(WARNING) $(ERROR)
+VAL = valgrind --tool=memcheck --log-file=memcheck.txt --leak-check=full --show-leak-kinds=all --verbose
 
 TESTFALGS = -DTEST_COUNTWORD # -DDEBUG
 
@@ -20,6 +21,9 @@ hw06: $(OBJS)
 	$(GCC) $(TESTFALGS) -c $*.c 
 
 testall: test1 test2 test3 test4 test5 test6
+
+testmemory: hw06
+	$(VAL) ./hw06 inputs/input1 output1
 
 test1: hw06
 	./hw06 inputs/input1 "on" > output1
