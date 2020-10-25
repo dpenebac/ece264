@@ -25,7 +25,7 @@ int main(int argc, char * * argv)
   int size;
 
   bool rtv;
-  rtv = readData(....); // read the input file, allocate memory
+  rtv = readData(argv[1],); // read the input file, allocate memory
   if (rtv == false)
     {
       return EXIT_FAILURE;

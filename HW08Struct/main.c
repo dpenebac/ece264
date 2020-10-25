@@ -16,16 +16,33 @@ int main(int argc, char * * argv)
 
   // check whether there are three arguments.
   // If not, return EXIT_FAILURE. DO NOT print anything
+  if (argc != 3)
+  {
+    return EXIT_FAILURE;
+  }
 
   // use argv[1] as the input to countVector, save the result
+  int numElem = countVector(argv[1]);
 
   // if the number of vector is 0 or negative, return EXIT_FAILURE
-
+  if (numElem == 0 || numElem < 0)
+  {
+    return EXIT_FAILURE;
+  }
   // otherwise, allocate memory for an array of vectors
+  Vector * vecArr;
+  vecArr = malloc(sizeof(* vecArr) * numElem);
 
   // read the vectors from the file whose name is argv[1]. save the
   // results in the allocated array
   // if reading fails, release memory and return EXIT_FAILURE
+
+  bool rtv = readVector(argv[1],vecArr,numElem);
+  if (rtv == false)
+  {
+    free(vecArr);
+    return EXIT_FAILURE;
+  }
 
 #ifdef DEBUG
   printVector(vecArr, numElem);
@@ -37,10 +54,19 @@ int main(int argc, char * * argv)
   printVector(vecArr, numElem);
 #endif  
 
+  qsort(vecArr,numElem,sizeof(Vector),compareVector);
+
   // write the sorted array to the file whose name is argv[2]
   // if writing fails, release memory and return EXIT_FAILURE
-  
-
+  rtv = writeVector(argv[2],vecArr,numElem);
+  if (rtv == false)
+  {
+    free(vecArr);
+    return EXIT_FAILURE;
+  }
+    
+  free(vecArr);
+  return EXIT_SUCCESS;
   // release memory, return EXIT_SUCCESS
 }
 #endif
