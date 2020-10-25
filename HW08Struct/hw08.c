@@ -24,7 +24,6 @@ int countVector(char * filename)
   int seek = fseek(file,0L,SEEK_END);
   long len = ftell(file);
   len = len / sizeof(Vector);
-  printf("\n%ld %d\n",len, seek);
 
   fclose(file);
   return(len);
