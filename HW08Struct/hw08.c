@@ -21,7 +21,7 @@ int countVector(char * filename)
     return(false);
   }
   
-  int seek = fseek(file,0L,SEEK_END);
+  fseek(file,0L,SEEK_END);
   long len = ftell(file);
   len = len / sizeof(Vector);
 

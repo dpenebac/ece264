@@ -87,7 +87,7 @@ bool readData(char * filename, int * * arr, int * size)
 
 
   // use fread to read the number of integers in the file
-  int numRead = fread(& arr[0], sizeof(arr), 
+  int numRead = fread(& arr[0], sizeof(int), 
 
 
 
