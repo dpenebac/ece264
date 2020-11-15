@@ -31,6 +31,11 @@ void printListNode(ListNode * head)
 // return the head of the linked listn
 ListNode * createList(int valn)
 {
+  int i;
+  for (i = 0; i < valn; i++)
+  {
+    
+  }
 }
 #endif
 

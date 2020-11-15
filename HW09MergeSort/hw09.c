@@ -57,16 +57,14 @@ bool readData(char * filename, int * * arr, int * size)
   // use fseek to go back to the beginning of the file
   // check whether fseek fails
   seek = fseek(file,0,SEEK_SET);
+
+  // if fseek fails, fclose and return false
   
   if (seek != 0)
   {
     fclose(file);
     return(false); 
   }
-
-  
-  // if fseek fails, fclose and return false
-
 
 
   // the number of integers is the file's size divided by
@@ -87,7 +85,7 @@ bool readData(char * filename, int * * arr, int * size)
 
 
   // use fread to read the number of integers in the file
-  int numRead = fread(& arr[0], sizeof(int), 
+  size = fread(&arr[0], sizeof(int), size, file); 
 
 
 
@@ -95,21 +93,23 @@ bool readData(char * filename, int * * arr, int * size)
   // release allocated memory
   // fclose
   // return false
-
-
-
-
-  
+  if (size != numInt)
+  {
+    fclose(file);
+    free(arr);
+    return(false)
+  }
+ 
   // if fread succeeds
   // close the file
-
+  fclose(file);
   
   // update the argument for the array address
-
+  
 
   
   // update the size of the array
-
+  
 
   
   return true;
